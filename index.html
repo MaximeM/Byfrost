@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Byfrost · Your desktop, anywhere</title>
-<meta name="description" content="Stream your whole screen, a single app or your games from your own machine, and share it through a link. Mac, Windows, iPhone and iPad.">
-<meta name="theme-color" content="#0A0C13">
+<title>Byfrost · Streaming that just works</title>
+<meta name="description" content="Use your computer from any other screen. Install Byfrost on two devices and you're done. Mac, Windows, iPhone and iPad.">
+<meta name="theme-color" content="#F3FBFE">
 <meta property="og:title" content="Byfrost">
-<meta property="og:description" content="Stream your whole screen, a single app or your games from your own machine, and share it through a link.">
-<meta property="og:image" content="images/bridge.webp">
+<meta property="og:description" content="Use your computer from any other screen. Install Byfrost on two devices and you're done.">
+<meta property="og:image" content="images/hero-desktop.webp">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/Sora.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Oxanium.woff2" as="font" type="font/woff2" crossorigin>
@@ -16,506 +16,286 @@
 @font-face{font-family:Oxanium;src:url(fonts/Oxanium.woff2) format("woff2");font-weight:200 800;font-display:swap}
 @font-face{font-family:Sora;src:url(fonts/Sora.woff2) format("woff2");font-weight:100 800;font-display:swap}
 :root{
-  --void:#0A0C13; --frost:#E2F7FE; --blue:#00E5FF; --violet:#B800FF;
-  --deep:#06323b; --teal:#0b5d68; --pale:#a8f3fc;
-  --quiet:#B4C7CF; --panel:#111522; --panel2:#171c2b; --line:#ffffff1a;
-  --m:clamp(20px,4vw,64px); --gap:clamp(96px,11vw,168px);
+  --bg:#F3FBFE; --card:#FFFFFF; --ink:#0A0C13; --soft:#3A4752; --muted:#55646F;
+  --blue:#00E5FF; --blue-ink:#006673; --violet:#B800FF; --tint:#DDF6FC; --dark:#0A0C13;
+  --m:clamp(20px,4vw,64px); --gap:clamp(88px,10vw,150px);
   --ease:cubic-bezier(.23,1,.32,1);
-  --s:15px; --b:17px; --l:clamp(19px,1.6vw,22px); --h:clamp(34px,4vw,60px); --d:clamp(44px,6.2vw,96px);
-  --trail:polygon(7% 0,100% 0,93% 100%,0 100%);
+  --s:15px; --b:17px; --l:clamp(19px,1.6vw,22px); --h:clamp(34px,4vw,58px); --d:clamp(46px,7vw,108px);
+  --r:22px;
 }
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--void);color:var(--frost);font:400 var(--b)/1.55 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3{font-family:Oxanium,Sora,sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.01em}
+body{background:var(--bg);color:var(--ink);font:400 var(--b)/1.6 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:Oxanium,Sora,sans-serif;font-weight:600;line-height:1.04;letter-spacing:-.01em}
 h2{font-size:var(--h)}
 a{color:inherit}
+.mark{background:linear-gradient(transparent 62%,#00E5FF80 62%)}
+.lead{font-size:var(--l);color:var(--soft);max-width:40ch}
+.fine{font-size:var(--s);color:var(--muted)}
+.btn{display:inline-block;background:var(--ink);color:#fff;font:600 var(--b)/1 Sora,sans-serif;padding:20px 38px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform 160ms var(--ease),background-color 160ms ease}
+.btn:hover{background:#2a0a3a}.btn:active{transform:scale(.97)}
+.btn.light{background:var(--blue);color:var(--ink)}.btn.light:hover{background:#7ff2ff}
+.btn.sm{padding:12px 22px;font-size:var(--s)}
+.btn:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--blue-ink);outline-offset:3px}
 section{scroll-margin-top:24px}
-.wrap{padding-inline:var(--m)}
-.lead{font-size:var(--l);max-width:38ch}
-.quiet{color:var(--quiet)}
-.btn{display:inline-block;background:var(--blue);color:var(--void);font:600 var(--b)/1 Sora,sans-serif;padding:20px 44px;text-decoration:none;clip-path:var(--trail);border:0;cursor:pointer;transition:transform 160ms var(--ease),background-color 160ms ease}
-.btn:hover{background:var(--frost)}
-.btn:active{transform:scale(.97)}
-.btn:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--frost);outline-offset:4px}
-.ghost{color:var(--frost);text-underline-offset:4px;margin-left:24px;white-space:nowrap;display:inline-block;margin-top:12px}
-.fine{margin-top:20px;font-size:var(--s);color:var(--quiet)}
-.bullet{display:inline-block;width:.9em;height:.5em;background:var(--blue);clip-path:var(--trail);margin-right:.6em;vertical-align:.08em;flex:none}
-
-/* interface fragments */
-.ui{background:var(--panel);font-size:var(--s);overflow:hidden}
-.ui .bar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--quiet);white-space:nowrap}
-.ui .bar i{width:10px;height:10px;border-radius:50%;background:#ffffff2e;flex:none}
-.ui .bar .r{margin-left:auto}
-.pill{display:inline-block;background:var(--blue);color:var(--void);padding:4px 12px;font-weight:600;clip-path:var(--trail);font-size:var(--s);white-space:nowrap}
-.pill.v{background:#8f00c7;color:#fff}
-.code{font:500 14px/1.7 Sora,sans-serif;padding:14px 16px;color:var(--quiet);white-space:pre}
-.code b{color:var(--blue);font-weight:500}.code u{color:#d98bff;text-decoration:none}
-
-/* reveal */
 @media (prefers-reduced-motion:no-preference){
   .rv{opacity:0;transform:translateY(16px);transition:opacity 600ms var(--ease),transform 600ms var(--ease)}
-  .rv.in{opacity:1;transform:none}
-  .d2{transition-delay:90ms}.d3{transition-delay:180ms}
+  .rv.in{opacity:1;transform:none}.d2{transition-delay:90ms}.d3{transition-delay:180ms}
 }
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;padding:22px var(--m)}
-nav .logo{display:flex;align-items:center;gap:12px;font:700 var(--l) Oxanium,sans-serif;letter-spacing:.14em;text-decoration:none}
-nav .logo svg{width:30px;height:30px}
+nav .logo{display:flex;align-items:center;gap:10px;font:700 var(--l) Oxanium,sans-serif;letter-spacing:.14em;text-decoration:none}
+nav .logo svg{width:28px;height:28px}
 nav .links{display:flex;gap:30px;align-items:center}
-nav .links a{text-decoration:none;color:var(--quiet);transition:color 160ms ease}
-nav .links a:hover{color:var(--frost)}
-nav .links .btn{padding:12px 24px;font-size:var(--s);color:var(--void)}
+nav .links a:not(.btn){text-decoration:none;color:var(--soft)}
+nav .links a:not(.btn):hover{color:var(--ink)}
 
-/* 1 HERO */
-.hero{min-height:min(100svh,920px);display:grid;grid-template-rows:auto 1fr}
-.hero .body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:48px;padding:0 var(--m) 7vh}
-.hero h1{font-size:var(--d);margin-bottom:28px;white-space:nowrap}
-.rot{color:var(--blue);display:inline-block}
-@media (prefers-reduced-motion:no-preference){.rot.swap{animation:swap 420ms var(--ease)}@keyframes swap{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}}
-.hero .lead{margin-bottom:40px}
-.tabs{display:flex;margin-bottom:14px}
-.tabs button{all:unset;cursor:pointer;padding:12px 22px;font:600 var(--s) Sora;color:var(--quiet);clip-path:var(--trail);transition:background-color 200ms ease,color 200ms ease}
-.tabs button:hover{color:var(--frost)}
-.tabs button[aria-selected=true]{background:var(--blue);color:var(--void)}
-.scene{aspect-ratio:16/9;position:relative;overflow:hidden}
-.scene>.sc{position:absolute;inset:0;opacity:0;transition:opacity 420ms var(--ease);display:flex;flex-direction:column}
-.scene>.sc.on{opacity:1}
-.scene>.sc{margin:0;overflow:hidden}
-.scene img{display:block;width:100%;height:100%;object-fit:cover}
-.scene figcaption{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:10px;background:#0A0C13e6;padding:8px 14px 8px 8px;font:500 var(--s) Sora;white-space:nowrap}
-/* hero: a Byfrost client window showing the stream */
-.bwin{background:#141826;box-shadow:0 30px 80px #000a}
-.bbar{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;color:var(--quiet);white-space:nowrap}
-.bbar>i{width:11px;height:11px;border-radius:50%;background:#ffffff2e;flex:none}
-.bbar .ttl{margin-left:8px;color:var(--frost);overflow:hidden;text-overflow:ellipsis;min-width:0}
-.bbar .chips{margin-left:auto;display:flex;gap:6px;align-items:center}
-.bbar .chip{background:#ffffff12;padding:4px 10px;font-size:13px}.bbar .chip b{color:var(--blue);font-weight:600}
-.scene>.sc{overflow:hidden}
-.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.scr-desk .mbar{position:absolute;left:0;right:0;top:0;display:flex;gap:16px;padding:5px 12px;background:#0a0c13b3;font-size:13px}
-.scr-desk .mbar .r{margin-left:auto;color:var(--quiet)}
-.scr-desk .dw{position:absolute;background:#171c2bf2;box-shadow:0 14px 40px #0009;font-size:13px}
-.scr-desk .dt{display:flex;gap:6px;align-items:center;padding:7px 10px;background:#1f2536;color:var(--quiet)}
-.scr-desk .dt i{width:9px;height:9px;border-radius:50%;background:#ffffff2e}
-.scr-desk .w1{left:6%;top:14%;width:52%}
-.scr-desk .w1 .code{font-size:13px}
-.scr-desk .w2{left:52%;top:40%;width:40%}
-.scr-desk .row{display:flex;justify-content:space-between;padding:7px 12px;gap:12px;white-space:nowrap}
-.scr-desk .dockb{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:6px;background:#0a0c13a6;padding:6px 8px}
-.scr-desk .dockb i{width:20px;height:20px;background:#ffffff33}
-.scr-desk .dockb i:nth-child(2){background:var(--blue)}.scr-desk .dockb i:nth-child(5){background:var(--violet)}
-.hudb{position:absolute;left:12px;bottom:12px;display:flex;gap:6px;flex-wrap:wrap}
-.hudb span{background:#0a0c13d9;padding:6px 12px;font:600 13px Sora;white-space:nowrap}.hudb b{color:var(--blue)}
-.guests{position:absolute;right:12px;top:12px;width:min(230px,46%);background:#0a0c13e0;padding:10px;display:grid;gap:6px;font-size:13px}
-.guests .gh{color:var(--quiet);padding:2px 4px 4px}
-.guests .g{display:flex;align-items:center;gap:8px;padding:6px 8px;background:#ffffff0d;white-space:nowrap}
-.guests .g i{width:18px;height:18px;border-radius:50%;flex:none}
-.guests .g em{margin-left:auto;font-style:normal;color:var(--quiet)}
-/* desktop scene */
-.dsk{flex:1;position:relative;background:#0d1f29}
-.dsk .menu{display:flex;gap:16px;padding:6px 12px;background:#0008;font-size:13px;color:var(--frost)}
-.dsk .w{position:absolute;background:var(--panel2);border:1px solid var(--line)}
-.dsk .w .bar{padding:6px 10px;font-size:13px}
-.dsk .w1{left:5%;top:16%;width:58%;height:66%}
-.dsk .w2{left:52%;top:30%;width:42%;height:56%}
-.dsk .w2 .row{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--line);font-size:13px}
-.dsk .dock{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);display:flex;gap:6px;background:#0007;padding:6px 8px}
-.dsk .dock i{width:18px;height:18px;background:#ffffff33}
-.dsk .dock i:nth-child(2){background:var(--blue)}.dsk .dock i:nth-child(4){background:var(--violet)}
-/* game scene */
-.gm{flex:1;position:relative;background:var(--void);overflow:hidden}
-.gm::before{content:"";position:absolute;left:0;right:0;top:0;height:45%;background:#0b1622}
-.gm .sun{position:absolute;left:58%;top:16%;width:22%;aspect-ratio:1;border-radius:50%;background:var(--violet);opacity:.85}
-.gm .ridge{position:absolute;left:0;right:0;top:28%;height:20%;background:#132a3a;clip-path:polygon(0 70%,14% 30%,28% 62%,44% 18%,60% 55%,76% 25%,100% 60%,100% 100%,0 100%)}
-.gm .road{position:absolute;left:50%;bottom:0;width:120%;height:55%;transform:translateX(-50%);background:#0f141f;clip-path:polygon(46% 0,54% 0,100% 100%,0 100%)}
-.gm .lane{position:absolute;left:50%;bottom:0;width:2%;height:55%;transform:translateX(-50%);background:repeating-linear-gradient(var(--blue) 0 14px,transparent 14px 30px);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%)}
-@media (prefers-reduced-motion:no-preference){.gm .lane{animation:lane .5s linear infinite}@keyframes lane{to{background-position:0 30px}}}
-.gm .hud{position:absolute;left:12px;top:12px;display:flex;gap:8px;flex-wrap:wrap}
-.gm .hud span{background:#000b;padding:6px 12px;font:600 13px Sora;white-space:nowrap}
-.gm .hud b{color:var(--blue)}
-/* share scene */
-.sh{flex:1;display:grid;grid-template-columns:1.5fr 1fr;gap:10px;padding:12px}
-.sh .main{position:relative;background:#0d1f29;overflow:hidden}
-.sh .main .code{font-size:13px}
-.sh .ppl{display:grid;gap:8px;align-content:start}
-.sh .p{display:flex;align-items:center;gap:10px;background:var(--panel2);padding:9px 12px;font-size:13px;white-space:nowrap}
-.sh .p i{width:24px;height:24px;border-radius:50%;flex:none}
-.sh .p em{margin-left:auto;font-style:normal;color:var(--quiet)}
+/* HERO */
+.hero{padding:6vh var(--m) 0}
+.hero .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center}
+.hero h1{font-size:clamp(44px,6vw,92px);margin-bottom:24px}
+.hero .lead{margin-bottom:34px}
+.hero .fine{margin-top:18px}
+.hero .ghost{margin-left:22px;color:var(--soft);white-space:nowrap}
+.device{background:var(--card);border-radius:28px;padding:14px;box-shadow:0 30px 70px #0a0c131f}
+.device .screen{border-radius:16px;overflow:hidden;aspect-ratio:16/10;position:relative}
+.device img{width:100%;height:100%;object-fit:cover;display:block}
+.device .badge{position:absolute;left:14px;top:14px;display:flex;align-items:center;gap:8px;background:#ffffffeb;color:var(--ink);padding:8px 14px;border-radius:999px;font-size:var(--s);font-weight:500}
+.device .badge i{width:9px;height:9px;border-radius:50%;background:#18c47a}
+.device .caption{display:flex;justify-content:space-between;padding:12px 6px 2px;font-size:var(--s);color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:72px}
+.step{background:var(--card);border-radius:var(--r);padding:24px 26px}
+.step b{display:flex;align-items:center;gap:12px;font:600 var(--l) Oxanium,sans-serif;margin-bottom:6px}
+.step b i{width:32px;height:32px;border-radius:50%;background:var(--blue);display:grid;place-items:center;font:700 15px Sora;font-style:normal}
+.step:nth-child(3) b i{background:var(--violet);color:#fff}
+.step p{color:var(--muted);font-size:var(--s)}
 
-/* 2 GAMING */
-.game{padding:var(--gap) var(--m) 0}
-.game .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:end}
-.game .num{font:700 clamp(140px,22vw,340px)/.8 Oxanium,sans-serif;letter-spacing:-.04em;color:var(--blue)}
-.game .num small{font-size:.26em;letter-spacing:0;color:var(--frost);margin-left:.08em}
-.game h2{margin-bottom:20px}
-.frame{margin-top:72px}
-.frame .track{position:relative;height:72px;background:var(--panel)}
-.frame .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue);clip-path:polygon(0 0,100% 0,calc(100% - 18px) 100%,0 100%);transition:width 1100ms var(--ease)}
-.frame.in .fill{width:95.8%}
-.frame .lbl{display:flex;justify-content:space-between;margin-top:14px;font-size:var(--s);color:var(--quiet);gap:16px}
-.frame .lbl b{color:var(--frost);font-weight:600}
-.frame .in-fill{position:absolute;left:20px;top:50%;transform:translateY(-50%);font:600 var(--s) Sora;color:var(--void);z-index:1;white-space:nowrap}
-.frame .end{position:absolute;right:-1px;top:-14px;bottom:-14px;width:2px;background:var(--frost)}
-.note{margin-top:20px;font-size:var(--s);color:var(--quiet)}
+/* WHAT YOU CAN DO */
+.uses{padding:var(--gap) var(--m) 0}
+.uses .head{max-width:52ch;margin-bottom:48px}
+.uses .head h2{margin-bottom:16px}
+.use{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center;margin-bottom:72px}
+.use:nth-child(odd){grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+.use:nth-child(odd) .pic{order:2}
+.use .pic{border-radius:28px;overflow:hidden;aspect-ratio:3/2}
+.use .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.use h3{font-size:clamp(28px,2.8vw,40px);margin-bottom:14px}
+.use .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--blue-ink);background:var(--tint);padding:6px 12px;border-radius:999px;margin-bottom:16px}
+.use ul{list-style:none;padding:0;margin-top:20px;display:grid;gap:10px}
+.use li{display:flex;gap:12px;color:var(--soft)}
+.use li::before{content:"";flex:none;width:20px;height:20px;margin-top:4px;border-radius:50%;background:var(--tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='%23006673' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
 
-/* 3 DESKTOP OR ONE APP */
-.mode{padding:var(--gap) var(--m) 0}
-.mode .head{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-bottom:56px}
-.mode .head h2{grid-column:1/7}
-.mode .head p{grid-column:8/13}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.duo>div{background:var(--panel);display:flex;flex-direction:column}
-.duo .vis{aspect-ratio:16/10;position:relative;background:#0d1f29;overflow:hidden}
-.duo .txt{padding:28px 32px 32px}
-.duo h3{font-size:var(--l);margin-bottom:8px}
-.duo .txt p{color:var(--quiet);max-width:42ch}
-.one .floatw{position:absolute;left:12%;top:14%;width:76%;height:72%;background:var(--panel2);border:1px solid var(--blue)}
-.one .floatw .bar{padding:8px 12px}
-.one .ghostdesk{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffffff06 0 1px,transparent 1px 48px)}
-
-/* 3 GLIDE */
-.bridged{padding:var(--gap) var(--m) 0}
-.bridged h2 .glide{color:var(--blue);font-size:1.6em;display:inline-block;margin-bottom:.12em}
-.bridged .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-bottom:48px;align-items:end}
-.reveal{display:inline-flex;align-items:center;gap:14px;margin-top:28px;cursor:pointer;font-weight:600}
+/* GLIDE */
+.glide{padding:var(--gap) var(--m) 0}
+.glide .box{background:var(--dark);color:#E2F7FE;border-radius:32px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:center}
+.glide .kicker{color:var(--blue);font:600 var(--l) Oxanium,sans-serif;margin-bottom:10px;display:block}
+.glide h2{margin-bottom:18px}
+.glide .lead{color:#B4C7CF}
+.glide .lead+.lead{margin-top:14px;font-size:var(--b)}
+.desk{position:relative;aspect-ratio:16/10;border-radius:18px;background:#E8EEF2;overflow:hidden}
+.desk .w{position:absolute;background:#fff;border-radius:12px;box-shadow:0 14px 34px #0a0c1326;color:var(--ink);font-size:14px;overflow:hidden}
+.desk .t{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#F4F6F8;font-weight:500;white-space:nowrap}
+.desk .t i{width:9px;height:9px;border-radius:50%;background:#d0d7dd}
+.desk .t em{margin-left:auto;font-style:normal;font-size:12px;padding:3px 9px;border-radius:999px;opacity:0;transition:opacity 220ms ease}
+.desk.show .t em{opacity:1}
+.desk .local{left:5%;top:9%;width:42%;height:60%}
+.desk .local .t em{background:#E8EEF2}
+.desk .remote{left:36%;top:22%;width:58%;height:62%}
+.desk .remote .t em{background:var(--blue)}
+.desk.show .remote{outline:3px solid var(--blue)}
+.desk .row{display:flex;justify-content:space-between;padding:8px 12px;border-top:1px solid #eef1f3;white-space:nowrap}
+.desk .row span:last-child{color:var(--muted)}
+.desk .menu{display:flex;gap:2px;padding:4px 8px;font-size:13px}
+.desk .menu span{padding:3px 8px;border-radius:6px}.desk .menu .on{background:var(--blue)}
+.desk .tracks{padding:10px 12px;display:grid;gap:9px}
+.desk .tracks div{display:flex;align-items:center;gap:10px;font-size:13px}.desk .tracks b{width:52px;font-weight:500}
+.desk .tracks i{height:12px;border-radius:6px;background:var(--blue)}.desk .tracks div:nth-child(2) i{background:var(--violet)}
+.desk .bar{position:absolute;left:0;right:0;bottom:0;height:40px;background:#ffffffd9;display:flex;align-items:center;gap:8px;padding:0 14px;font-size:13px;color:var(--muted)}
+.desk .bar b{width:18px;height:18px;border-radius:5px;background:var(--ink)}
+.desk .bar span.on{color:var(--ink);font-weight:600}
+.reveal{display:inline-flex;align-items:center;gap:12px;margin-top:26px;cursor:pointer;font-weight:600;color:#E2F7FE}
 .reveal input{position:absolute;opacity:0}
-.reveal .sw{width:52px;height:30px;background:var(--panel2);position:relative;transition:background-color 200ms ease;flex:none}
-.reveal .sw::after{content:"";position:absolute;left:4px;top:4px;width:22px;height:22px;background:var(--frost);transition:transform 220ms var(--ease)}
-.reveal input:checked+.sw{background:var(--blue)}
-.reveal input:checked+.sw::after{transform:translateX(22px);background:var(--void)}
-.reveal input:focus-visible+.sw{outline:2px solid var(--frost);outline-offset:3px}
-.stage{position:relative;aspect-ratio:16/8.4;overflow:hidden;background:#0f2633}
-.win{position:absolute;background:var(--panel2);box-shadow:0 18px 50px #0008;display:flex;flex-direction:column;font-size:var(--s);transition:outline-color 240ms ease;outline:3px solid transparent;outline-offset:2px}
-.win .bar{display:flex;gap:8px;align-items:center;padding:10px 14px;background:#1d2334;white-space:nowrap}
-.win .bar i{width:10px;height:10px;border-radius:50%;background:#ffffff2e;flex:none}
-.win .where{margin-left:auto;padding:3px 10px;font:600 13px Sora;opacity:0;transform:translateY(-4px);transition:opacity 220ms ease,transform 220ms var(--ease)}
-.win .rows div{display:flex;justify-content:space-between;padding:10px 16px;gap:16px;white-space:nowrap}
-.menubar{display:flex;gap:4px;padding:4px 8px;background:#151a28;font-size:14px}
-.menubar span{padding:4px 10px}.menubar .open{background:var(--blue);color:var(--void)}
-.dropdown{position:absolute;left:10px;top:78px;width:min(260px,60%);background:#22283a;box-shadow:0 14px 40px #000a;padding:6px;font-size:14px;z-index:2}
-.dropdown div{padding:7px 12px;white-space:nowrap}.dropdown div:hover{background:var(--blue);color:var(--void)}
-.dropdown .sep{height:1px;padding:0;margin:4px 0;background:#ffffff1f}
-.tracks{flex:1;position:relative;padding:18px 16px 16px 290px;display:grid;gap:10px;align-content:start;background:repeating-linear-gradient(90deg,#ffffff08 0 1px,transparent 1px 64px)}
-.tracks div{display:flex;align-items:center;gap:6px;font-size:14px}.tracks b{width:64px;font-weight:500;flex:none;color:var(--quiet)}
-.tracks i{display:block;height:22px;background:var(--blue);opacity:.75;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-.tracks .v i{background:var(--violet)}.tracks .p i{background:var(--pale)}
-.tracks .head{position:absolute;top:8px;bottom:8px;left:62%;width:2px;background:var(--frost)}
-.taskbar{position:absolute;left:0;right:0;bottom:0;height:46px;background:#090b12ee;display:flex;align-items:center;gap:6px;padding:0 12px;font-size:14px}
-.taskbar .start{width:22px;height:22px;background:var(--blue);clip-path:var(--trail);margin-right:8px}
-.taskbar .t{padding:6px 14px;color:var(--quiet)}.taskbar .t.on{color:var(--frost);background:#ffffff14}
-.taskbar .clock{margin-left:auto;color:var(--quiet)}
-.stage.show .win.local{outline-color:#E2F7FE}.stage.show .win.remote{outline-color:var(--blue)}
-.stage.show .where{opacity:1;transform:none}
-.win.local .where{background:var(--frost);color:var(--void)}.win.remote .where{background:var(--blue);color:var(--void)}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
-.facts>div{display:flex;gap:2px}.facts b{display:block;font-weight:600}.facts p{color:var(--quiet)}
+.reveal .sw{width:50px;height:28px;border-radius:999px;background:#2a3542;position:relative;transition:background-color 200ms ease;flex:none}
+.reveal .sw::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform 220ms var(--ease)}
+.reveal input:checked+.sw{background:var(--blue)}.reveal input:checked+.sw::after{transform:translateX(22px)}
+.reveal input:focus-visible+.sw{outline:3px solid var(--blue);outline-offset:3px}
 
-/* 4 FULL DESKTOP */
-.desk2{padding:var(--gap) var(--m) 0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:56px;align-items:center}
-.desk2 h2{margin-bottom:20px}
-.photo{margin:0;overflow:hidden}
-.photo img{display:block;width:100%;height:auto}
-.desk2 .photo img{aspect-ratio:3/2;object-fit:cover}
-.share .photo img{aspect-ratio:16/8;object-fit:cover}
-.game .photo img{aspect-ratio:16/7;object-fit:cover;object-position:50% 40%}
-.band{margin:var(--gap) 0 0;overflow:hidden}
-.band img{display:block;width:100%;height:clamp(240px,34vw,520px);object-fit:cover;object-position:60% 55%}
+/* SHARE */
+.share{padding:var(--gap) var(--m) 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.share h2{margin-bottom:18px}
+.invite{background:var(--card);border-radius:28px;padding:28px;box-shadow:0 20px 50px #0a0c1314}
+.invite h3{font-size:var(--l);margin-bottom:4px}
+.invite .fine{margin-bottom:18px}
+.invite .link{display:flex;gap:8px;margin-bottom:22px}
+.invite code{flex:1;min-width:0;background:var(--bg);border-radius:999px;padding:14px 18px;font:500 var(--s) Sora;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.invite .people{display:grid;gap:8px}
+.invite .p{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:var(--bg)}
+.invite .p i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:600 14px Sora;font-style:normal;color:#fff}
+.invite .p em{margin-left:auto;font-style:normal;font-size:13px;color:var(--muted)}
+.invite .p.ctrl{outline:2px solid var(--violet)}
+.invite .p.ctrl em{color:var(--violet);font-weight:600}
 
-/* 4 SHARING */
-.share{padding:var(--gap) var(--m) 0}
-.share .top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:48px;align-items:end;margin-bottom:48px}
-.share h2{font-size:var(--d);max-width:12ch}
-.wall{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;height:clamp(260px,30vw,420px)}
-.wall>div{position:relative;overflow:hidden;background:var(--panel2)}
-.wall .host{grid-row:span 2;background:#0d1f29}
-.wall .host .code{font-size:13px}
-.wall .tag{position:absolute;left:12px;bottom:12px;background:#000c;padding:5px 10px;font-size:13px;white-space:nowrap}
-.wall .dot{position:absolute;right:12px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--blue)}
-.wall .seat .mini{position:absolute;inset:14% 10% 30%;background:#0d1f29;overflow:hidden}
-.wall img{display:block;width:100%;height:100%;object-fit:cover}
-.wall .host img{position:absolute;inset:0}
-.wall .live-badge{position:absolute;left:12px;top:12px;display:flex;align-items:center;gap:10px;background:#0A0C13e6;padding:6px 12px 6px 6px;font-size:13px;white-space:nowrap}
-.wall .ctrl{outline:2px solid var(--violet);outline-offset:-2px}
-.wall .ctrl .dot{background:var(--violet)}
-.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
-.rules>div{display:flex;gap:2px;font-size:var(--b)}
-.rules b{display:block;font-weight:600}
-.rules p{color:var(--quiet)}
+/* FAQ */
+.faq{padding:var(--gap) var(--m) 0;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px;align-items:start}
+.faq h2{position:sticky;top:32px}
+.faq details{background:var(--card);border-radius:18px;padding:0 24px;margin-bottom:10px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:600 22px Oxanium;color:var(--blue-ink);transition:transform 200ms var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--soft);max-width:62ch}
 
-/* 5 UNDER THE HOOD */
-.hood{padding:var(--gap) var(--m) 0}
-.hood .grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px}
-.hood h2{margin-bottom:20px}
-.spec{list-style:none;padding:0;display:grid;gap:28px}
-.spec li{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px}
-.spec li span{display:flex;align-items:baseline;font-weight:600}
-.spec li p{color:var(--quiet)}
-
-/* 6 DOWNLOAD */
-.dl{padding:var(--gap) var(--m) 96px}
-.dl h2{font-size:var(--d);margin-bottom:16px}
-.dl .lead{margin-bottom:56px}
-.plats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.plat{position:relative;background:var(--panel);padding:28px 28px 30px;display:flex;flex-direction:column;gap:6px;min-height:240px;transition:background-color 200ms ease}
+/* DOWNLOAD */
+.dl{padding:var(--gap) var(--m)}
+.dl .box{background:var(--card);border-radius:32px;padding:clamp(32px,5vw,64px);text-align:center}
+.dl h2{margin-bottom:14px}
+.dl .lead{margin:0 auto 40px}
+.plats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:left}
+.plat{border-radius:20px;background:var(--bg);padding:22px;display:flex;flex-direction:column;gap:4px;position:relative}
 .plat h3{font-size:var(--l)}
-.plat p{color:var(--quiet);font-size:var(--s);flex:1}
-.plat .btn{align-self:flex-start;padding:14px 28px;font-size:var(--s);margin-top:18px}
-.plat .soon{align-self:flex-start;margin-top:18px;padding:14px 0;font:600 var(--s) Sora;color:var(--quiet)}
-.plat.you{background:var(--blue);color:var(--void)}
-.plat.you p{color:#0a0c13cc}
-.plat.you .btn{background:var(--void);color:var(--frost)}
-.plat.you .btn:hover{background:var(--violet)}
-.plat .yours{position:absolute;right:20px;top:20px;font:600 13px Sora;display:none}
+.plat p{font-size:var(--s);color:var(--muted);flex:1}
+.plat .btn{align-self:flex-start;margin-top:16px;padding:12px 22px;font-size:var(--s)}
+.plat .soon{margin-top:16px;padding:12px 0;font-size:var(--s);font-weight:600;color:var(--muted)}
+.plat.you{background:var(--tint);outline:2px solid var(--blue)}
+.plat .yours{position:absolute;right:16px;top:18px;font-size:13px;font-weight:600;color:var(--blue-ink);display:none}
 .plat.you .yours{display:block}
-.plat.you .soon{color:var(--void)}
 
-/* FOOTER */
-footer{padding:0 var(--m) 28px}
-footer .top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px 48px;flex-wrap:wrap;padding-top:72px;border-top:1px solid var(--line)}
-footer .tag{font:600 var(--h)/1.02 Oxanium,sans-serif;letter-spacing:-.01em}
-footer .tag span{color:var(--blue)}
-footer .links{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:var(--s)}
-footer a{color:var(--quiet);text-decoration:none;transition:color 160ms ease}
-footer a:hover{color:var(--frost)}
-footer .wm{margin-top:clamp(56px,7vw,104px)}
-footer .wm{aspect-ratio:4798/690;background:linear-gradient(90deg,#00E5FF 0 50%,#7000FF 86%,#B800FF);-webkit-mask:url(images/wordmark.svg) center/contain no-repeat;mask:url(images/wordmark.svg) center/contain no-repeat}
-footer .last{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;margin-top:28px;font-size:var(--s);color:var(--quiet)}
-footer .last a{text-decoration:underline;text-underline-offset:3px}
-footer .last .up{text-decoration:none}
+footer{padding:0 var(--m) 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:var(--s)}
+footer nav{padding:0;gap:22px;display:flex;flex-wrap:wrap}
+footer a{text-decoration:none}
 
-@media (max-width:980px){
-  .plats{grid-template-columns:1fr 1fr}
-  .rules{grid-template-columns:1fr}
-}
-@media (max-width:980px){
-  .tracks{padding-left:16px;padding-top:170px}
-  .stage{aspect-ratio:auto;height:520px}
-}
-@media (max-width:820px){
-  .bridged .head,.desk2,.facts{grid-template-columns:1fr}
-  .win.local{display:none}
-  .win.remote{left:4%!important;width:92%!important;top:6%!important;height:76%!important}
+@media (max-width:900px){
   nav .links a:not(.btn){display:none}
-  .hero{min-height:auto}
-  .hero .body,.game .grid,.share .top,.hood .grid,.duo{grid-template-columns:minmax(0,1fr)}
-  .hero .body{padding-top:5vh}
-  .mode .head{display:block}.mode .head p{margin-top:16px}
-  .wall{grid-template-columns:1fr 1fr;grid-auto-rows:120px;height:auto}
-  .wall .host{grid-column:1/-1;grid-row:auto;height:200px}
-  .spec li{grid-template-columns:1fr;gap:6px}
-  .ghost{display:block;margin:18px 0 0}
-  .frame .lbl{flex-direction:column}
+  .hero .grid,.use,.use:nth-child(odd),.glide .box,.share,.faq{grid-template-columns:minmax(0,1fr)}
+  .faq h2{position:static}
+  .use:nth-child(odd) .pic{order:0}
+  .steps{grid-template-columns:1fr}
+  .plats{grid-template-columns:1fr 1fr}
+  .hero .ghost{display:block;margin:16px 0 0}
 }
-@media (max-width:520px){
-  .bbar .chip{display:none}
-  .scr-desk .w2,.guests .g:nth-child(n+4){display:none}
-  .scr-desk .w1{width:80%}
-  .plats{grid-template-columns:1fr}
-  .sh{grid-template-columns:1fr}.sh .ppl{display:none}
-}
+@media (max-width:520px){ .plats{grid-template-columns:1fr} .desk{aspect-ratio:4/3} .desk .local{display:none} .desk .remote{left:5%;top:8%;width:90%;height:72%} }
 </style>
 </head>
 <body>
 
-<!-- 1 · HERO -->
 <header class="hero" id="top">
-  <nav>
-    <a class="logo" href="#top"><svg viewBox="0 0 240 240" aria-hidden="true"><g transform="translate(18 5)"><path d="M35 48H135L128 60H65Z" fill="#00E5FF"/><path d="M20 72H125L120 82H55Z" fill="#00E5FF"/><path d="M10 96H115L110 104H45Z" fill="#00E5FF"/><path d="M162 115C192 122 200 152 185 178C172 198 148 205 115 205H55C68 180 85 158 110 142C95 160 86 174 80 185H118C140 185 155 176 160 162C165 146 155 132 135 128Z" fill="#B800FF"/><path d="M40 25H145C185 25 205 46 198 78C192 104 168 118 132 124C82 132 48 162 18 205H0C25 152 65 116 122 104C150 98 166 88 170 72C174 54 160 44 132 44H78Z" fill="#00E5FF"/></g></svg>BYFROST</a>
-    <span class="links"><a href="#gaming">Gaming</a><a href="#apps">Glide</a><a href="#desktop">Desktop</a><a href="#sharing">Sharing</a><a class="btn" href="#download">Download</a></span>
+  <nav style="padding-inline:0">
+    <a class="logo" href="#top"><svg viewBox="0 0 240 240" aria-hidden="true"><g transform="translate(18 5)"><path d="M35 48H135L128 60H65Z" fill="#00B8CC"/><path d="M20 72H125L120 82H55Z" fill="#00B8CC"/><path d="M10 96H115L110 104H45Z" fill="#00B8CC"/><path d="M162 115C192 122 200 152 185 178C172 198 148 205 115 205H55C68 180 85 158 110 142C95 160 86 174 80 185H118C140 185 155 176 160 162C165 146 155 132 135 128Z" fill="#B800FF"/><path d="M40 25H145C185 25 205 46 198 78C192 104 168 118 132 124C82 132 48 162 18 205H0C25 152 65 116 122 104C150 98 166 88 170 72C174 54 160 44 132 44H78Z" fill="#00B8CC"/></g></svg>BYFROST</a>
+    <span class="links"><a href="#how">How it works</a><a href="#uses">What you can do</a><a href="#faq">Questions</a><a class="btn sm" href="#download">Download</a></span>
   </nav>
-  <div class="body">
+  <div class="grid">
     <div>
-      <h1 class="rv">Your <span class="rot" id="rot">desktop</span>.<br>Anywhere.</h1>
-      <p class="lead rv d2">Stream your whole screen, a single app or your games from your own machine, and share it with anyone through a link.</p>
-      <div class="rv d3"><a class="btn dl-main" href="#download">Download for Windows</a><a class="ghost dl-alt" href="#download">Also on Mac and iPhone</a></div>
+      <h1 class="rv">Streaming that<br><span class="mark">just works.</span></h1>
+      <p class="lead rv d2">Use your computer from any other screen. No setup guides, no network settings, no waiting. Install Byfrost on two devices and you're done.</p>
+      <div class="rv d3"><a class="btn dl-main" href="#download">Coming soon</a><a class="ghost" href="#how">See how it works</a></div>
       <p class="fine rv d3">Free · Mac · Windows · iPhone &amp; iPad · Linux soon</p>
     </div>
-    <div class="rv d2">
-      <div class="tabs" role="tablist" aria-label="What to stream">
-        <button role="tab" aria-selected="true" data-w="desktop">Desktop</button>
-        <button role="tab" aria-selected="false" data-w="games">Games</button>
-        <button role="tab" aria-selected="false" data-w="audience">Audience</button>
-      </div>
-      <div class="bwin" data-ui>
-        <div class="bbar"><i></i><i></i><i></i><span class="ttl" id="bttl">Byfrost — Studio-Mac</span><span class="chips"><span class="chip"><b>16 ms</b></span><span class="chip">60 fps</span><span class="pill" id="bstate">Live</span></span></div>
-        <div class="scene">
-          <div class="sc on scr-desk">
-            <img src="images/scr-desktop.webp" width="1536" height="864" alt="">
-            <div class="mbar"><b>Finder</b><span>File</span><span>Edit</span><span>View</span><span>Go</span><span class="r">Tue 14:02</span></div>
-            <div class="dw w1"><div class="dt"><i></i><i></i><i></i>&nbsp;render.rs</div><div class="code"><u>fn</u> <b>encode_frame</b>(&amp;mut self) {
-    let tex = self.capture.next()?;
-    self.encoder.<b>submit</b>(tex)
-}</div></div>
-            <div class="dw w2"><div class="dt"><i></i><i></i><i></i>&nbsp;Downloads</div><div class="row"><span>mix_final.wav</span><span class="quiet">84 MB</span></div><div class="row"><span>cover.psd</span><span class="quiet">212 MB</span></div><div class="row"><span>notes.md</span><span class="quiet">4 KB</span></div></div>
-            <div class="dockb"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="sc scr-game">
-            <img src="images/scr-game.webp" width="1536" height="864" alt="" loading="lazy">
-            <div class="hudb"><span><b>16 ms</b> · under one frame</span><span>60 fps</span><span>NVENC · H.265</span></div>
-          </div>
-          <div class="sc scr-share">
-            <img src="images/blender-render.webp" width="1280" height="720" alt="" loading="lazy">
-            <div class="guests">
-              <div class="gh">3 guests · up to 4</div>
-              <div class="g"><i style="background:#00E5FF"></i>You<em>host</em></div>
-              <div class="g"><i style="background:#B800FF"></i>Léa<em>watching</em></div>
-              <div class="g"><i style="background:#5876ff"></i>Sam<em>watching</em></div>
-              <div class="g"><i style="background:#a8f3fc"></i>Noor<em>has control</em></div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="device rv d2">
+      <div class="screen"><img src="images/hero-desktop.webp" width="1536" height="1024" alt="A laptop on the sofa showing the same desktop as the computer across the room"><span class="badge"><i></i>Connected to Studio-Mac</span></div>
+      <div class="caption"><span>On the sofa</span><span>Running on the desk</span></div>
     </div>
+  </div>
+  <div class="steps" id="how">
+    <div class="step rv"><b><i>1</i>Install</b><p>On the computer at home and on the device you're holding.</p></div>
+    <div class="step rv d2"><b><i>2</i>Pair</b><p>Type a short code once. They remember each other.</p></div>
+    <div class="step rv d3"><b><i>3</i>Enjoy</b><p>Open any app or game as if you were sitting in front of it.</p></div>
   </div>
 </header>
 
-<!-- 2 · GAMING -->
-<section class="game" id="gaming" aria-labelledby="game-h">
-  <div class="grid">
-    <div class="num rv" aria-hidden="true">16<small>ms</small></div>
+<section class="uses" id="uses" aria-labelledby="uses-h">
+  <div class="head rv">
+    <h2 id="uses-h">One computer, every screen.</h2>
+    <p class="lead">Your games, apps and files stay where they are. Byfrost brings them to the screen in front of you.</p>
+  </div>
+  <div class="use">
+    <div class="pic rv"><img src="images/gaming.webp" width="1536" height="864" alt="Someone on a sofa playing a racing game on a large TV" loading="lazy"></div>
     <div class="rv d2">
-      <h2 id="game-h">Less than a frame.</h2>
-      <p class="lead">At 60 fps a frame lasts 16.7 ms. Byfrost gets the picture from your PC's GPU to your screen inside that window, so the game feels like it is running in front of you.</p>
+      <h3>Play your PC games from the couch.</h3>
+      <p class="lead">The game runs on your gaming PC. You play on the TV, a laptop or a tablet, and it feels like you're right next to it.</p>
+      <ul><li>Smooth enough for fast games</li><li>Sound comes along with the picture</li><li>Nothing to install on the game itself</li></ul>
     </div>
   </div>
-  <figure class="photo rv" style="margin-top:72px"><img src="images/gaming.webp" width="1536" height="864" alt="Someone on a sofa playing a racing game on a large TV, a gaming PC glowing in the next room" loading="lazy"></figure>
-  <div class="frame rv" id="frame">
-    <div class="track"><div class="fill"></div><span class="in-fill">Byfrost · 16 ms</span><span class="end"></span></div>
-    <div class="lbl"><span>Capture → encode → network → decode → display</span><span><b>One frame at 60 fps · 16.7 ms</b></span></div>
-  </div>
-  <p class="note">Measured end to end on a local network. Streams up to 4K. Over the internet, expect more depending on distance.</p>
-</section>
-
-<!-- 3 · BRIDGED APPS -->
-<section class="bridged" id="apps" aria-labelledby="apps-h">
-  <div class="head">
-    <h2 id="apps-h" class="rv"><span class="glide">Glide.</span><br>Remote apps that feel local.</h2>
+  <div class="use">
+    <div class="pic rv"><img src="images/cafe.webp" width="1536" height="1024" alt="A laptop on a café table at night showing a video editing session" loading="lazy"></div>
     <div class="rv d2">
-      <p class="lead">Glide one app from the other machine and it lands on your desktop as a window of its own, next to your local apps. Its menus, dialogs and pop-ups follow it.</p>
-      <label class="reveal"><input type="checkbox" id="reveal"><span class="sw"></span>Show where each window runs</label>
+      <h3>Your studio, in a light laptop.</h3>
+      <p class="lead">Leave the powerful computer at home. Edit, design or code on it from the café, the train or the office.</p>
+      <ul><li>Your whole desktop or just one app</li><li>Sound comes with the picture</li><li>Your files never leave your computer</li></ul>
     </div>
-  </div>
-  <div class="stage rv" data-ui id="stage">
-    <div class="wall-bg"></div>
-    <div class="win local" style="left:4%;top:8%;width:40%;height:62%">
-      <div class="bar"><i></i><i></i><i></i>&nbsp;Explorer — Projects<span class="where">Local · this PC</span></div>
-      <div class="rows"><div><span>album_cover.psd</span><span class="quiet">212 MB</span></div><div><span>mix_v3.session</span><span class="quiet">1.4 GB</span></div><div><span>notes.md</span><span class="quiet">4 KB</span></div><div><span>tour_dates.xlsx</span><span class="quiet">36 KB</span></div></div>
-    </div>
-    <div class="win remote" style="left:34%;top:18%;width:58%;height:66%">
-      <div class="bar"><i></i><i></i><i></i>&nbsp;Mixdown — mix_v3<span class="where">Glided from Studio-Mac</span></div>
-      <div class="menubar"><span class="open">File</span><span>Edit</span><span>Track</span><span>Mix</span><span>View</span></div>
-      <div class="dropdown"><div>New…</div><div>Open…</div><div>Save</div><div class="sep"></div><div>Bounce ▸ Project or Section…</div></div>
-      <div class="tracks" role="img" aria-label="Music app arrange window with audio and MIDI tracks">
-        <div><b>Drums</b><i style="width:22%"></i><i style="width:30%"></i></div>
-        <div class="v"><b>Bass</b><i style="width:14%;margin-left:8%"></i><i style="width:34%"></i></div>
-        <div class="p"><b>Keys</b><i style="width:40%;margin-left:16%"></i></div>
-        <div><b>Vocals</b><i style="width:18%;margin-left:24%"></i><i style="width:20%"></i></div>
-        <div class="v"><b>FX</b><i style="width:8%;margin-left:44%"></i><i style="width:8%;margin-left:6%"></i></div>
-        <span class="head"></span>
-      </div>
-    </div>
-    <div class="taskbar"><span class="start"></span><span class="t">Explorer</span><span class="t on">Mixdown</span><span class="t">Browser</span><span class="clock">14:02</span></div>
-  </div>
-  <div class="facts">
-    <div class="rv"><span class="bullet"></span><div><b>Its own window</b><p>Move it, resize it, put it beside your local apps. No remote desktop frame around it.</p></div></div>
-    <div class="rv d2"><span class="bullet"></span><div><b>Menus come along</b><p>A Mac app's menu bar is mirrored on Windows, so every command is where you expect it.</p></div></div>
-    <div class="rv d3"><span class="bullet"></span><div><b>Dialogs follow</b><p>Save sheets, pickers and pop-ups open as real windows on your side.</p></div></div>
   </div>
 </section>
 
-<!-- 4 · FULL DESKTOP -->
-<section class="desk2" id="desktop" aria-labelledby="desk-h">
-  <figure class="photo rv"><img src="images/cafe.webp" width="1536" height="1024" alt="A laptop on a café table at night, a video editing session on its screen" loading="lazy"></figure>
-  <div class="txt rv d2">
-    <h2 id="desk-h">Or the whole desktop.</h2>
-    <p class="lead">Leave the studio, keep the studio. Open your entire Mac or PC from a laptop, a tablet or a phone, at the resolution of the machine you left at home.</p>
-    <p class="fine">ScreenCaptureKit on Mac, Desktop Duplication on Windows.</p>
-  </div>
-</section>
-
-<!-- 4 · SHARING -->
-<section class="share" id="sharing" aria-labelledby="share-h">
-  <div class="top">
-    <h2 id="share-h" class="rv">One screen. Everyone in.</h2>
-    <p class="lead rv d2">Send a link. Up to four guests watch in their browser with nothing to install, and you decide who gets the keyboard.</p>
-  </div>
-  <div class="wall rv" data-ui>
-    <div class="host"><img src="images/blender-render.webp" width="1280" height="720" alt="" loading="lazy"><span class="live-badge"><span class="pill v">Shared</span>Blender · 4 watching</span><span class="tag">You · host</span></div>
-    <div class="seat"><div class="mini"><img src="images/blender-render.webp" alt="" loading="lazy"></div><span class="dot"></span><span class="tag">Léa · Chrome</span></div>
-    <div class="seat"><div class="mini"><img src="images/blender-render.webp" alt="" loading="lazy"></div><span class="dot"></span><span class="tag">Sam · Safari</span></div>
-    <div class="seat ctrl"><div class="mini"><img src="images/blender-render.webp" alt="" loading="lazy"></div><span class="dot"></span><span class="tag">Noor · has control</span></div>
-    <div class="seat"><div class="mini"><img src="images/blender-render.webp" alt="" loading="lazy"></div><span class="dot"></span><span class="tag">Guest 4 · iPhone</span></div>
-  </div>
-  <div class="rules">
-    <div class="rv"><span class="bullet"></span><div><b>View only by default</b><p>Guests watch. Nobody types until you say so.</p></div></div>
-    <div class="rv d2"><span class="bullet"></span><div><b>Hand over control</b><p>Give one guest the keyboard and mouse, take it back in a click.</p></div></div>
-    <div class="rv d3"><span class="bullet"></span><div><b>Links that expire</b><p>Each link is temporary. Sound is shared only if you turn it on.</p></div></div>
-  </div>
-</section>
-
-<!-- 5 · UNDER THE HOOD -->
-<section class="hood" aria-labelledby="hood-h">
-  <div class="grid">
+<section class="glide" aria-labelledby="glide-h">
+  <div class="box">
     <div class="rv">
-      <h2 id="hood-h">Built for speed, from the GPU up.</h2>
-      <p class="lead quiet">Written in Rust, with hardware doing the heavy work on both ends.</p>
+      <span class="kicker">Glide</span>
+      <h2 id="glide-h">Your Mac apps, right on your PC.</h2>
+      <p class="lead">Glide one app from your other computer and it opens in its own window, next to your other apps. Same menus, same shortcuts. You won't even notice where it runs.</p>
+      <label class="reveal"><input type="checkbox" id="reveal"><span class="sw"></span>Show me which one is remote</label>
     </div>
-    <ul class="spec rv d2">
-      <li><span><span class="bullet"></span>Hardware encoding</span><p>VideoToolbox on Mac, NVENC and D3D12 on Windows.</p></li>
-      <li><span><span class="bullet"></span>Peer to peer</span><p>Your machines connect to each other directly whenever the network allows it.</p></li>
-      <li><span><span class="bullet"></span>Encrypted</span><p>Every packet authenticated with XChaCha20-Poly1305.</p></li>
-      <li><span><span class="bullet"></span>Holds up on Wi-Fi</span><p>Error correction, retransmission and pacing keep the picture steady.</p></li>
-      <li><span><span class="bullet"></span>Sound included</span><p>Opus audio travels with the picture.</p></li>
-    </ul>
+    <div class="desk rv d2" id="desk" data-ui role="img" aria-label="A Windows desktop with a local file window and a music app window glided from a Mac">
+      <div class="w local"><div class="t"><i></i><i></i><i></i>&nbsp;Projects<em>On this PC</em></div><div class="row"><span>album_cover.psd</span><span>212 MB</span></div><div class="row"><span>mix_v3.session</span><span>1.4 GB</span></div><div class="row"><span>tour_dates.xlsx</span><span>36 KB</span></div></div>
+      <div class="w remote"><div class="t"><i></i><i></i><i></i>&nbsp;Mixdown · mix_v3<em>From your Mac</em></div><div class="menu"><span class="on">File</span><span>Edit</span><span>Track</span><span>Mix</span></div><div class="tracks"><div><b>Vocals</b><i style="width:62%"></i></div><div><b>Bass</b><i style="width:44%"></i></div><div><b>Drums</b><i style="width:78%"></i></div><div><b>Keys</b><i style="width:30%"></i></div></div></div>
+      <div class="bar"><b></b><span>Projects</span><span class="on">Mixdown</span><span>Browser</span><span style="margin-left:auto">14:02</span></div>
+    </div>
   </div>
 </section>
 
-<figure class="band rv"><img src="images/bridge.webp" width="1536" height="864" alt="A suspension bridge at night, traffic light trails in cyan and violet" loading="lazy"></figure>
+<section class="share" id="share" aria-labelledby="share-h">
+  <div class="rv">
+    <h2 id="share-h">Show your screen to friends.</h2>
+    <p class="lead">Send a link. Up to four people watch in their browser, with nothing to install. You decide who's allowed to click and type.</p>
+    <p class="fine" style="margin-top:16px">Perfect next to a Meet, Zoom or Teams call: everyone sees your screen sharp while you keep talking.</p>
+  </div>
+  <div class="invite rv d2" data-ui aria-label="Example of a sharing link with three guests">
+    <h3>Sharing Blender</h3>
+    <p class="fine">Private link · view only · expires in 1 hour</p>
+    
+    <div class="people">
+      <div class="p"><i style="background:#00B8CC">L</i>Léa<em>watching</em></div>
+      <div class="p"><i style="background:#5876ff">S</i>Sam<em>watching</em></div>
+      <div class="p ctrl"><i style="background:#B800FF">N</i>Noor<em>can click &amp; type</em></div>
+    </div>
+  </div>
+</section>
 
-<!-- 6 · DOWNLOAD -->
+<section class="faq" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h" class="rv">Questions,<br>simply answered.</h2>
+  <div>
+  <details class="rv" open><summary>Is it really free?</summary><p>Yes. Download Byfrost on your devices and start using it. Friends you share with don't even need an account.</p></details>
+  <details class="rv"><summary>Do I need a fast internet connection?</summary><p>At home, your Wi-Fi is enough. Away from home, a normal broadband or 5G connection works for apps; games feel best on a good connection.</p></details>
+  <details class="rv"><summary>Is it safe?</summary><p>Your devices talk to each other directly and everything is encrypted. Sharing links expire, and guests can only watch until you give them control.</p></details>
+  <details class="rv"><summary>Which devices does it work on?</summary><p>Mac and Windows computers, plus iPhone and iPad to use them from anywhere. Linux is on its way.</p></details>
+  </div>
+</section>
+
 <section class="dl" id="download" aria-labelledby="dl-h">
-  <h2 id="dl-h" class="rv">Get Byfrost.</h2>
-  <p class="lead quiet rv d2">Install Byfrost on the machine you stream from and on the one you sit at. Free. Downloads open soon.</p>
-  <div class="plats">
-    <div class="plat rv" data-os="mac"><span class="yours">Your device</span><h3>Mac</h3><p>macOS 14 or later. Apple silicon and Intel.</p><span class="soon">Available soon</span></div>
-    <div class="plat rv d2" data-os="win"><span class="yours">Your device</span><h3>Windows</h3><p>Windows 10 20H1 or later. Installer or portable.</p><span class="soon">Available soon</span></div>
-    <div class="plat rv d3" data-os="ios"><span class="yours">Your device</span><h3>iPhone &amp; iPad</h3><p>Watch and control your Mac or PC from your phone or tablet.</p><span class="soon">Soon on the App Store</span></div>
-    <div class="plat rv d3" data-os="linux"><span class="yours">Your device</span><h3>Linux</h3><p>In the works. Use Mac or Windows as the host until then.</p><span class="soon">Coming soon</span></div>
+  <div class="box">
+    <h2 id="dl-h" class="rv">Get Byfrost.</h2>
+    <p class="lead rv d2">Install it on the computer you want to reach and on the device you're holding. Downloads open soon.</p>
+    <div class="plats">
+      <div class="plat rv" data-os="mac"><span class="yours">Your device</span><h3>Mac</h3><p>macOS 14 or later.</p><span class="soon">Available soon</span></div>
+      <div class="plat rv d2" data-os="win"><span class="yours">Your device</span><h3>Windows</h3><p>Windows 10 or later.</p><span class="soon">Available soon</span></div>
+      <div class="plat rv d3" data-os="ios"><span class="yours">Your device</span><h3>iPhone &amp; iPad</h3><p>Use your computer from anywhere.</p><span class="soon">Soon on the App Store</span></div>
+      <div class="plat rv d3" data-os="linux"><span class="yours">Your device</span><h3>Linux</h3><p>Coming soon.</p><span class="soon">Coming soon</span></div>
+    </div>
   </div>
 </section>
 
 <footer>
-  <div class="top">
-    <p class="tag rv">Your desktop.<br><span>Anywhere.</span></p>
-    <div class="links rv d2"><a href="#gaming">Gaming</a><a href="#apps">Glide</a><a href="#desktop">Desktop</a><a href="#sharing">Sharing</a><a href="#download">Platforms</a></div>
-  </div>
-  <div class="wm rv" role="img" aria-label="Byfrost"></div>
-  <div class="last"><span>© 2026 Byfrost</span><span>Blender screenshot: Blender Foundation, <a href="https://www.blender.org/about/license/">CC BY</a></span><a class="up" href="#top">Back to top ↑</a></div>
+  <span>© 2026 Byfrost</span>
+  <nav><a href="#how">How it works</a><a href="#faq">Questions</a><a href="#download">Platforms</a></nav>
 </footer>
 
 <script>
 (function(){
-  // platform: iPadOS reports itself as a Mac, touch points give it away
   var ua=navigator.userAgent,pf=navigator.platform||'';
   var os=/iPhone|iPad|iPod/.test(ua)||(pf==='MacIntel'&&navigator.maxTouchPoints>1)?'ios':/Android/.test(ua)?'android':/Mac/.test(pf)?'mac':/Win/.test(pf)?'win':/Linux|X11/.test(pf+ua)?'linux':'other';
-  var main={ios:'Soon on the App Store',android:'Coming to Mac and Windows',mac:'Coming soon for Mac',win:'Coming soon for Windows',linux:'Linux is coming soon',other:'Coming to Mac and Windows'}[os];
-  var alt={ios:'Also on Mac and Windows',android:'Also on iPhone and iPad',mac:'Also on Windows and iPhone',win:'Also on Mac and iPhone',linux:'Get it for Mac or Windows',other:'Also on iPhone'}[os];
-  document.querySelector('.dl-main').textContent=main;document.querySelector('.dl-alt').textContent=alt;
+  var label={ios:'Soon on the App Store',mac:'Coming soon for Mac',win:'Coming soon for Windows',linux:'Coming to Mac and Windows',android:'Coming to Mac and Windows',other:'Coming to Mac and Windows'}[os];
+  document.querySelector('.dl-main').textContent=label;
   var you=document.querySelector('.plat[data-os="'+os+'"]');if(you)you.classList.add('you');
-
-  // hero tabs + rotating noun
-  var tabs=document.querySelectorAll('.tabs button'),scenes=document.querySelectorAll('.scene>.sc'),rot=document.getElementById('rot'),i=0,timer;
-  function show(k,user){tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===k)});scenes.forEach(function(s,j){s.classList.toggle('on',j===k)});
-    rot.textContent=tabs[k].dataset.w;document.getElementById('bttl').textContent=['Byfrost — Studio-Mac · full desktop','Byfrost — Gaming-PC · full screen','Byfrost — Sharing Blender'][k];document.getElementById('bstate').textContent=['Live','Live','Shared'][k];rot.classList.remove('swap');void rot.offsetWidth;rot.classList.add('swap');i=k;if(user)clearInterval(timer)}
-  tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k,true)})});
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(function(){if(!document.hidden)show((i+1)%3)},3600);
-
-  // reveal where windows run
-  var rvl=document.getElementById('reveal'),st=document.getElementById('stage');rvl.addEventListener('change',function(){st.classList.toggle('show',rvl.checked)});
-
-  // reveal
+  var r=document.getElementById('reveal'),d=document.getElementById('desk');r.addEventListener('change',function(){d.classList.toggle('show',r.checked)});
   var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12}):null;
   document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});
 })();

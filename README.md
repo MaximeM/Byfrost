@@ -1,6 +1,9 @@
 # Byfrost website
 
-Static landing page for Byfrost. No build step: `index.html`, `images/`, `fonts/` and `favicon.svg` are served as is.
+Static landing pages for Byfrost. No build step: everything is served as is.
+
+- `index.html`: main landing page, served at `/`.
+- `b/index.html`: alternate landing page, served at `/b`. It shares `images/`, `fonts/` and `favicon.svg` with the root through `../` paths.
 
 Preview locally:
 
