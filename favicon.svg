@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="64" height="64">
+  <defs><linearGradient id="bridge" x1="0" y1="0" x2=".65" y2="1">
+    <stop stop-color="#E2F7FE"/><stop offset=".3" stop-color="#00E5FF"/>
+    <stop offset=".75" stop-color="#7000FF"/><stop offset="1" stop-color="#B800FF"/>
+  </linearGradient></defs>
+  <g transform="translate(18 5)" fill="url(#bridge)">
+    <path d="M40 25H145C185 25 205 46 198 78C192 104 168 118 132 124C82 132 48 162 18 205H0C25 152 65 116 122 104C150 98 166 88 170 72C174 54 160 44 132 44H78Z"/>
+    <path d="M162 115C192 122 200 152 185 178C172 198 148 205 115 205H55C68 180 85 158 110 142C95 160 86 174 80 185H118C140 185 155 176 160 162C165 146 155 132 135 128Z"/>
+  </g>
+  <path d="M48 57H145L137 72H76ZM34 86H126L116 101H60ZM30 115H95L83 129H51Z" fill="#00E5FF"/>
+</svg>
