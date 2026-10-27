@@ -89,7 +89,7 @@ nav .links .btn{padding:12px 24px;font-size:var(--s);color:var(--void)}
 .bwin{background:#141826;box-shadow:0 30px 80px #000a}
 .bbar{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;color:var(--quiet);white-space:nowrap}
 .bbar>i{width:11px;height:11px;border-radius:50%;background:#ffffff2e;flex:none}
-.bbar .ttl{margin-left:8px;color:var(--frost);overflow:hidden;text-overflow:ellipsis}
+.bbar .ttl{margin-left:8px;color:var(--frost);overflow:hidden;text-overflow:ellipsis;min-width:0}
 .bbar .chips{margin-left:auto;display:flex;gap:6px;align-items:center}
 .bbar .chip{background:#ffffff12;padding:4px 10px;font-size:13px}.bbar .chip b{color:var(--blue);font-weight:600}
 .scene>.sc{overflow:hidden}
@@ -299,7 +299,7 @@ footer .last .up{text-decoration:none}
   .win.remote{left:4%!important;width:92%!important;top:6%!important;height:76%!important}
   nav .links a:not(.btn){display:none}
   .hero{min-height:auto}
-  .hero .body,.game .grid,.share .top,.hood .grid,.duo{grid-template-columns:1fr}
+  .hero .body,.game .grid,.share .top,.hood .grid,.duo{grid-template-columns:minmax(0,1fr)}
   .hero .body{padding-top:5vh}
   .mode .head{display:block}.mode .head p{margin-top:16px}
   .wall{grid-template-columns:1fr 1fr;grid-auto-rows:120px;height:auto}
