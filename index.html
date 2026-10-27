@@ -273,12 +273,17 @@ nav .links .btn{padding:12px 24px;font-size:var(--s);color:var(--void)}
 
 /* FOOTER */
 footer{padding:0 var(--m) 28px}
-footer .mark{display:flex;gap:4px;align-items:flex-end;height:26svh;max-height:260px;margin-bottom:56px}
-footer .mark i{display:block;flex:1;clip-path:var(--trail)}
-footer .links{display:grid;grid-template-columns:repeat(3,1fr);max-width:720px;gap:24px;font-size:var(--s)}
-footer .links a{display:block;color:var(--quiet);text-decoration:none;margin-bottom:10px;transition:color 160ms ease}
-footer .links a:hover{color:var(--frost)}
-footer .last{display:flex;justify-content:space-between;align-items:center;margin-top:48px;font-size:var(--s);color:var(--quiet)}
+footer .top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px 48px;flex-wrap:wrap;padding-top:72px;border-top:1px solid var(--line)}
+footer .tag{font:600 var(--h)/1.02 Oxanium,sans-serif;letter-spacing:-.01em}
+footer .tag span{color:var(--blue)}
+footer .links{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:var(--s)}
+footer a{color:var(--quiet);text-decoration:none;transition:color 160ms ease}
+footer a:hover{color:var(--frost)}
+footer .wm{margin-top:clamp(56px,7vw,104px)}
+footer .wm{aspect-ratio:4798/690;background:linear-gradient(90deg,#00E5FF 0 50%,#7000FF 86%,#B800FF);-webkit-mask:url(images/wordmark.svg) center/contain no-repeat;mask:url(images/wordmark.svg) center/contain no-repeat}
+footer .last{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;margin-top:28px;font-size:var(--s);color:var(--quiet)}
+footer .last a{text-decoration:underline;text-underline-offset:3px}
+footer .last .up{text-decoration:none}
 
 @media (max-width:980px){
   .plats{grid-template-columns:1fr 1fr}
@@ -302,7 +307,6 @@ footer .last{display:flex;justify-content:space-between;align-items:center;margi
   .spec li{grid-template-columns:1fr;gap:6px}
   .ghost{display:block;margin:18px 0 0}
   .frame .lbl{flex-direction:column}
-  footer .links{grid-template-columns:1fr 1fr}
 }
 @media (max-width:520px){
   .bbar .chip{display:none}
@@ -483,13 +487,12 @@ footer .last{display:flex;justify-content:space-between;align-items:center;margi
 </section>
 
 <footer>
-  <div class="mark rv" aria-hidden="true"><i style="height:100%;background:#00E5FF"></i><i style="height:84%;background:#00E5FF"></i><i style="height:68%;background:#00E5FF"></i><i style="height:52%;background:#B800FF"></i><i style="height:36%;background:#B800FF"></i></div>
-  <div class="links">
-    <div><a href="#gaming">Gaming</a><a href="#apps">Glide</a></div>
-    <div><a href="#desktop">Desktop</a><a href="#sharing">Sharing</a></div>
-    <div><a href="#download">Platforms</a></div>
+  <div class="top">
+    <p class="tag rv">Your desktop.<br><span>Anywhere.</span></p>
+    <div class="links rv d2"><a href="#gaming">Gaming</a><a href="#apps">Glide</a><a href="#desktop">Desktop</a><a href="#sharing">Sharing</a><a href="#download">Platforms</a></div>
   </div>
-  <div class="last"><span>© 2026 Byfrost · Blender screenshot: Blender Foundation, <a href="https://www.blender.org/about/license/">CC BY</a></span><a class="btn" style="padding:14px 28px;font-size:var(--s)" href="#top">Back to top</a></div>
+  <div class="wm rv" role="img" aria-label="Byfrost"></div>
+  <div class="last"><span>© 2026 Byfrost</span><span>Blender screenshot: Blender Foundation, <a href="https://www.blender.org/about/license/">CC BY</a></span><a class="up" href="#top">Back to top ↑</a></div>
 </footer>
 
 <script>
